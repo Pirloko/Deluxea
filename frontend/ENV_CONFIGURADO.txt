@@ -1,0 +1,6 @@
+# Copia este contenido al archivo frontend/.env
+
+VITE_SUPABASE_URL=https://ryjwlwrwxyosmnhsmmma.supabase.co
+VITE_SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJ5andsd3J3eHlvc21uaHNtbW1hIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjIwMjU3ODUsImV4cCI6MjA3NzYwMTc4NX0.noo_q8N1x8VnhFd4r6Es6dqtEWvzsXdjaPgmhoLpM88
+VITE_API_URL=http://localhost:8000
+

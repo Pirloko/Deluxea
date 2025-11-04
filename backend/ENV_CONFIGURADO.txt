@@ -1,0 +1,19 @@
+# Copia este contenido al archivo backend/.env
+
+# Supabase Configuration
+SUPABASE_URL=https://ryjwlwrwxyosmnhsmmma.supabase.co
+SUPABASE_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJ5andsd3J3eHlvc21uaHNtbW1hIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc2MjAyNTc4NSwiZXhwIjoyMDc3NjAxNzg1fQ.oWTON4oY_skUZjaa5fQYkfnlkVtOEDGVWjV1rvZluhs
+SUPABASE_JWT_SECRET=gIoJgeiJtBVBYGZElf6XCNuNP/gf8t80dMO6mE+WLTX8ptRQMmYIkjMLbdxsDwRmVTTOhPUAtgzcNPo5Wdmhwg==
+
+# JWT Configuration
+JWT_SECRET_KEY=nvH30Ro2lYrLmNnjkSGKXhWqWcUS83Gt8WC-FXEuu2k
+JWT_ALGORITHM=HS256
+ACCESS_TOKEN_EXPIRE_MINUTES=30
+
+# CORS Configuration
+CORS_ORIGINS=http://localhost:3000
+
+# API Configuration
+API_V1_PREFIX=/api/v1
+PROJECT_NAME=Deluxea API
+

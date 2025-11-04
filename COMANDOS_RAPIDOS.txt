@@ -1,0 +1,89 @@
+# 🚀 COMANDOS RÁPIDOS - Deluxea
+
+=====================================
+INSTALACIÓN (primera vez)
+=====================================
+
+./instalar.sh
+
+O manualmente:
+  cd backend && python3 -m venv venv && source venv/bin/activate && pip install -r requirements.txt
+  cd frontend && npm install
+
+=====================================
+INICIAR BACKEND (Terminal 1)
+=====================================
+
+cd backend
+source venv/bin/activate
+python3 main.py
+
+=====================================
+INICIAR FRONTEND (Terminal 2)
+=====================================
+
+cd frontend
+npm run dev
+
+=====================================
+URLS IMPORTANTES
+=====================================
+
+Frontend:  http://localhost:3000
+API Docs:  http://localhost:8000/docs
+API:       http://localhost:8000
+Supabase:  https://supabase.com/dashboard/project/ryjwlwrwxyosmnhsmmma
+
+=====================================
+CREAR ADMIN (via API)
+=====================================
+
+1. Ir a: http://localhost:8000/docs
+2. POST /api/v1/users
+3. Try it out
+4. Pegar:
+
+{
+  "email": "admin@deluxea.com",
+  "password": "Admin123456!",
+  "role": "admin",
+  "is_active": true,
+  "must_change_password": false
+}
+
+5. Execute
+
+=====================================
+LOGIN
+=====================================
+
+URL:      http://localhost:3000/login
+Email:    admin@deluxea.com
+Password: Admin123456!
+
+=====================================
+VERIFICAR
+=====================================
+
+curl http://localhost:8000/health
+curl http://localhost:8000/api/v1/gifts
+
+=====================================
+COMANDOS ÚTILES
+=====================================
+
+# Ver archivos .env
+cat backend/.env
+cat frontend/.env
+
+# Verificar instalación
+python3 check-setup.py
+
+# Reinstalar backend
+cd backend && rm -rf venv && python3 -m venv venv && source venv/bin/activate && pip install -r requirements.txt
+
+# Reinstalar frontend
+cd frontend && rm -rf node_modules package-lock.json && npm install
+
+=====================================
+
