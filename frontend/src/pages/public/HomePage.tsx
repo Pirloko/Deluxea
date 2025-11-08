@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { supabase } from '@/lib/supabase'
-import { Heart, MessageCircle, Gift, Star } from 'lucide-react'
+import { Heart, Star, Phone, MessageCircle } from 'lucide-react'
 
 interface Profile {
   id: string
@@ -12,6 +12,7 @@ interface Profile {
   avatar_url: string | null
   category: string | null
   tags: string[] | null
+  contact_number: string | null
 }
 
 export default function HomePage() {
@@ -19,7 +20,7 @@ export default function HomePage() {
   const [loading, setLoading] = useState(true)
   const [selectedCategory, setSelectedCategory] = useState<string>('all')
 
-  const categories = ['all', 'Entretenimiento', 'Fitness', 'Arte', 'Música', 'Gastronomía']
+  const categories = ['all', 'Escort', 'Trans', 'Hombres', 'Masajes', 'Venta de Contenido']
 
   useEffect(() => {
     fetchProfiles()
@@ -104,67 +105,88 @@ export default function HomePage() {
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
             {profiles.map((profile) => (
-              <Link
+              <div
                 key={profile.id}
-                to={`/profile/${profile.user_id}`}
                 className="card hover:shadow-lg transition-shadow group"
               >
-                <div className="aspect-square rounded-lg bg-gradient-to-br from-primary-100 to-pink-100 mb-4 overflow-hidden">
-                  {profile.avatar_url ? (
-                    <img 
-                      src={profile.avatar_url} 
-                      alt={profile.name}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                    />
-                  ) : (
-                    <div className="w-full h-full flex items-center justify-center text-6xl font-bold text-primary-600">
-                      {profile.name.charAt(0)}
+                <Link to={`/profile/${profile.user_id}`}>
+                  <div className="aspect-square rounded-lg bg-gradient-to-br from-primary-100 to-pink-100 mb-4 overflow-hidden">
+                    {profile.avatar_url ? (
+                      <img 
+                        src={profile.avatar_url} 
+                        alt={profile.name}
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                      />
+                    ) : (
+                      <div className="w-full h-full flex items-center justify-center text-6xl font-bold text-primary-600">
+                        {profile.name.charAt(0)}
+                      </div>
+                    )}
+                  </div>
+                  
+                  <h3 className="font-bold text-lg mb-1 group-hover:text-primary-600 transition-colors">
+                    {profile.name}
+                  </h3>
+                  
+                  {profile.title && (
+                    <p className="text-sm text-gray-600 mb-2">{profile.title}</p>
+                  )}
+                  
+                  {profile.description && (
+                    <p className="text-sm text-gray-500 line-clamp-2 mb-3">
+                      {profile.description}
+                    </p>
+                  )}
+                  
+                  {profile.tags && profile.tags.length > 0 && (
+                    <div className="flex flex-wrap gap-1 mb-3">
+                      {profile.tags.slice(0, 3).map((tag, idx) => (
+                        <span 
+                          key={idx}
+                          className="px-2 py-1 bg-primary-50 text-primary-700 rounded-full text-xs"
+                        >
+                          {tag}
+                        </span>
+                      ))}
                     </div>
                   )}
-                </div>
+                </Link>
                 
-                <h3 className="font-bold text-lg mb-1 group-hover:text-primary-600 transition-colors">
-                  {profile.name}
-                </h3>
-                
-                {profile.title && (
-                  <p className="text-sm text-gray-600 mb-2">{profile.title}</p>
-                )}
-                
-                {profile.description && (
-                  <p className="text-sm text-gray-500 line-clamp-2 mb-3">
-                    {profile.description}
-                  </p>
-                )}
-                
-                {profile.tags && profile.tags.length > 0 && (
-                  <div className="flex flex-wrap gap-1 mb-3">
-                    {profile.tags.slice(0, 3).map((tag, idx) => (
-                      <span 
-                        key={idx}
-                        className="px-2 py-1 bg-primary-50 text-primary-700 rounded-full text-xs"
-                      >
-                        {tag}
-                      </span>
-                    ))}
+                {/* Botones de contacto */}
+                {profile.contact_number && (
+                  <div className="flex gap-2 mb-3">
+                    <a
+                      href={`tel:${profile.contact_number.replace(/[^0-9+]/g, '')}`}
+                      onClick={(e) => e.stopPropagation()}
+                      className="flex-1 flex items-center justify-center gap-1 px-3 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-colors text-sm font-medium"
+                    >
+                      <Phone className="w-4 h-4" />
+                      Llamar
+                    </a>
+                    <a
+                      href={`https://wa.me/${profile.contact_number.replace(/[^0-9]/g, '')}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={(e) => e.stopPropagation()}
+                      className="flex-1 flex items-center justify-center gap-1 px-3 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors text-sm font-medium"
+                    >
+                      <MessageCircle className="w-4 h-4" />
+                      WhatsApp
+                    </a>
                   </div>
                 )}
                 
-                <div className="flex items-center justify-between pt-3 border-t border-gray-100 text-gray-600">
+                <div className="flex items-center gap-4 pt-3 border-t border-gray-100 text-gray-600">
                   <div className="flex items-center gap-1">
                     <Heart className="w-4 h-4" />
                     <span className="text-xs">0</span>
                   </div>
                   <div className="flex items-center gap-1">
-                    <Star className="w-4 h-4" />
-                    <span className="text-xs">5.0</span>
-                  </div>
-                  <div className="flex items-center gap-1">
-                    <Gift className="w-4 h-4" />
-                    <span className="text-xs">0</span>
+                    <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />
+                    <span className="text-xs font-medium">5.0</span>
                   </div>
                 </div>
-              </Link>
+              </div>
             ))}
           </div>
         )}

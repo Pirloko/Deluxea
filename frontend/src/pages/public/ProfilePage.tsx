@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { supabase } from '@/lib/supabase'
-import { Heart, MessageCircle, Gift, Star, Phone, MapPin } from 'lucide-react'
+import { Heart, Star, Phone, MapPin, MessageCircle } from 'lucide-react'
 
 interface Profile {
   id: string
@@ -138,10 +138,26 @@ export default function ProfilePage() {
               </div>
 
               <div className="flex gap-3 mt-6">
-                <button className="btn-primary flex items-center gap-2">
-                  <Gift className="w-5 h-5" />
-                  Enviar Regalo
-                </button>
+                {profile.contact_number && (
+                  <>
+                    <a 
+                      href={`tel:${profile.contact_number}`}
+                      className="btn-primary flex items-center gap-2"
+                    >
+                      <Phone className="w-5 h-5" />
+                      Llamar
+                    </a>
+                    <a
+                      href={`https://wa.me/${profile.contact_number.replace(/[^0-9]/g, '')}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="bg-green-600 hover:bg-green-700 text-white px-6 py-2 rounded-lg font-medium transition-colors flex items-center gap-2"
+                    >
+                      <MessageCircle className="w-5 h-5" />
+                      WhatsApp
+                    </a>
+                  </>
+                )}
                 <button className="btn-secondary flex items-center gap-2">
                   <Heart className="w-5 h-5" />
                   Favorito
